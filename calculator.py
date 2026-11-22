@@ -11,7 +11,7 @@ def calculate(a, b):
     Perform calculation on two numbers.
     Initially supports basic addition.
     """
-    return a + b
+    return a + b  # Addition feature
 
 
 def main():
