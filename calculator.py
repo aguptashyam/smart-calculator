@@ -6,12 +6,17 @@ Demonstrating Git workflows and version control concepts.
 import sys
 
 
-def calculate(a, b):
+def calculate(a, b, operation="add"):
     """
     Perform calculation on two numbers.
-    Initially supports basic addition.
+    Supports both addition and multiplication operations.
     """
-    return a + b  # Addition feature
+    if operation in ("add", "+"):
+        return a + b  # Addition feature
+    elif operation in ("multiply", "*"):
+        return a * b  # Multiplication feature
+    else:
+        raise ValueError(f"Unsupported operation: {operation}")
 
 
 def main():
@@ -25,16 +30,23 @@ def main():
 
         val2 = input("Enter second number: ").strip()
         b = float(val2)
+
+        op = input("Choose operation (+ or * / add or multiply) [default: +]: ").strip().lower()
+        if not op:
+            op = "add"
     except ValueError:
         print("\n[Error] Invalid input. Please enter valid numeric values.")
         sys.exit(1)
 
-    result = calculate(a, b)
-    print("-" * 40)
-    print(f"Result: {result}")
-    print("=" * 40)
+    try:
+        result = calculate(a, b, op)
+        print("-" * 40)
+        print(f"Result: {result}")
+        print("=" * 40)
+    except ValueError as err:
+        print(f"\n[Error] {err}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
     main()
-
